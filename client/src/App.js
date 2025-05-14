@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
 
   const hideNavbarRoutes = [
     "/user-dashboard",
-    "/dashboard",
+    // "/dashboard",
     // "/login",
     // "/register",
     "/userlist",
