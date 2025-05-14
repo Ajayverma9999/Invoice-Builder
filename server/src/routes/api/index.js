@@ -67,7 +67,7 @@ router.get('/user/address', requireJwtAuth, User.getAddress);
 router.post('/user/password/change', User.updatePassword);
 router.post('/user/forgetPassword', User.forgetPassword);
 router.post('/user/verifification',requireJwtAuth, User.verifification);
-router.post('/user/cashback/add',requireJwtAuth, User.addwallet);
+// router.post('/user/cashback/add',requireJwtAuth, User.addwallet);
 
 
 router.get('/admin/dashboard', requireJwtAuth, Dashboard.adminDashboard);

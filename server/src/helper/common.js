@@ -1,12 +1,12 @@
 import 'dotenv/config';
 let logger = require('../services/logger');
-//import Promise from 'promise';
+// import Promise from 'promise';
 import Setting from '../features/Setting/setting';
 // import Shipping from '../features/Shipping/shipping';
 import Order from '../features/Order/order';
 import User from '../features/User/user';
 
-import Payment from '../features/Payment/payment'
+// import Payment from '../features/Payment/payment'
 import { emailmessage } from '../features/Notification/email';
 import { whatsaapNotify } from '../features/Notification/whatsapp';
 import { pcdealdiscount } from '../features/Order';

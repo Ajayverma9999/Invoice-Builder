@@ -3,7 +3,7 @@ import User from '../features/User/user';
 import Payment from '../features/Payment/payment';
 import Category from '../features/Category/category';
 import Product from '../features/Product/product';
-import Project from '../features/Project/project';
+// import Project from '../features/Project/project';
 const customerrole = '6114d5c422b7c53a358bba0b'
 
 let logger = require('../services/logger');
@@ -20,12 +20,12 @@ const counterReports = async (req, res) => {
     let counterPromis = await Promise.all([
       Category.countDocuments(),
       Product.countDocuments(),
-      Project.countDocuments()
+      // Project.countDocuments()
     ]);
     
     response.category = counterPromis[0];
     response.product = counterPromis[1];
-    response.project = counterPromis[2];
+    // response.project = counterPromis[2];
 
     response.message = "counted all the documents"
     response.status = 1;

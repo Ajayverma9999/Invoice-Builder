@@ -4,7 +4,7 @@ import User, { hashPassword } from '../features/User/user';
 import logger from '../services/logger';
 import Product from '../features/Product/product';
 import Order from '../features/Order/order';
-import Customize from '../features/Product/customised';
+// import Customize from '../features/Product/customised';
 
 import Category from '../features/Category/category'
 import Brand from '../features/Brand/brand';
@@ -312,38 +312,38 @@ const subproduct = async (req, res) => {
       })
       .on("end", async function () {
 
-        if (Object.values(addProduct).length) {
-          Customize.insertMany(Object.values(addProduct)).then(() => {
-            response.message = "Add SubProducts"
-            response.status = 1
-            res.json(response)
-          }).catch((err) => {
-            if (Object.values(err)[0] == 'BulkWriteError' && Object.values(err)[2] == 11000) {
-              response.message = "same products already added"
-              response.status = 0
-              res.json(response)
-            }
-          });
+        // if (Object.values(addProduct).length) {
+        //   Customize.insertMany(Object.values(addProduct)).then(() => {
+        //     response.message = "Add SubProducts"
+        //     response.status = 1
+        //     res.json(response)
+        //   }).catch((err) => {
+        //     if (Object.values(err)[0] == 'BulkWriteError' && Object.values(err)[2] == 11000) {
+        //       response.message = "same products already added"
+        //       response.status = 0
+        //       res.json(response)
+        //     }
+        //   });
 
-          fs.rmSync(`${data.destination}${data.filename}`)
-        } else if (Object.values(updateProduct).length) {
+        //   fs.rmSync(`${data.destination}${data.filename}`)
+        // } else if (Object.values(updateProduct).length) {
 
-          let allSlug = Object.keys(updateProduct)
+        //   let allSlug = Object.keys(updateProduct)
 
-          for (let singleSlug of allSlug) {
-            let data = {
-              "price": parseInt(updateProduct[singleSlug].price),
-              "stock": updateProduct[singleSlug].stock,
-              "alias": updateProduct[singleSlug].alias
-            }
-            await Customize.updateOne({ slug: singleSlug }, { $set: data })
-          }
+        //   for (let singleSlug of allSlug) {
+        //     let data = {
+        //       "price": parseInt(updateProduct[singleSlug].price),
+        //       "stock": updateProduct[singleSlug].stock,
+        //       "alias": updateProduct[singleSlug].alias
+        //     }
+        //     await Customize.updateOne({ slug: singleSlug }, { $set: data })
+        //   }
 
-          response.message = "updateing process start.."
-          response.status = 1
-          res.json(response)
-          fs.rmSync(`${data.destination}${data.filename}`)
-        }
+        //   response.message = "updateing process start.."
+        //   response.status = 1
+        //   res.json(response)
+        //   fs.rmSync(`${data.destination}${data.filename}`)
+        // }
       })
 
   } catch (err) {
