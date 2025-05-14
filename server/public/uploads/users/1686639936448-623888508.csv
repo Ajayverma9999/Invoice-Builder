@@ -1,0 +1,5 @@
+firstName,lastName,email,phone,password,gst,dob,companyName,city,state,pin code
+Customer,Singh,customer@gmail.com,1122334455,123456,havfly4324,,Customer,Hisar,Haryana,125001
+pardeep,PKN,pardeer@email.com,7474747474,123456,,,pardeep,Hisar,Haryana,125002
+pardeep,P,parder@gmail.com,1235474121,123456,,,pardeep,Hisar,Haryana,125003
+customer,K,customer@example.com,1245124515,123456,GSTNO123456,,customer,Hisar,Haryana,125004
