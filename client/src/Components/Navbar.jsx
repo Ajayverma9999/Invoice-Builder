@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import veg2 from '../image/images__1_-removebg-preview.png';
+import veg2 from '../image/logo-pdf_page-0001.jpg'; 
 import { IoHome } from "react-icons/io5"; 
 
 const Navbar = () => {
