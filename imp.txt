@@ -1,0 +1,94 @@
+Remove prepaid card and wallet.
+Upi gateway and prepaid wallet.
+Connect with pcdeal after sign up/login or if not have account on pcdeal add adddress.
+Address with GST no but not required.
+If any change happens in address list of updated address.
+Sign up fields - name, email, phone, password.
+Add fields for product weight.- done
+Make option for assembled pc option (i3,2gb ram , 1 tb disk, ) (i3,4gb ram , 1 tb disk).
+Coupon code can apply on minimum cart value and number of times use condition also.
+Billing/shipping address will be same and pickup option will be show with pickup address.
+Remarks option will be shown with order.
+Only one address need to store.
+Give cashback settings that show on checkout page. 
+Only transaction option shown.
+weight in grams.
+COD option to take advance.
+For shipping cost - All states divided into 7 zone , One of the local zone will there on base of zipcode.
+Price will 500 grams 20 rs. for eg.
+
+-------------------------------------------------------------------------------------------------
+
+    2. Proper Description/warranty/warranty procedure/ service center list.
+    3. Deal Section.
+    4. Minimum Order/Maximum Order Quantity
+    5. Product with different variant (e.g bare bone with different configurations)
+    6. Push Button Notifications
+    7. Selected Products on home page
+    8. Coupon Codes Multiple Types & According to Category or Product
+    9. Available Quantity
+    10. Credit Facility with extra charges
+    11. Order Processing Charges if not minimum amount order (optional) 
+    12. Weight of the items/ Dimensions of the items(L/W/D)
+    13. Courier Charges Matrix According to PIN Code or to make the things simpler 
+        a. We can do fix courier charges
+        b. Or according to weight and pin code
+    14. Rate updating from CSV with easiest method
+    15. PIN CODE related delivery
+    16. Integration with ship rocket/other courier service with real time tracking option
+    17. Scheme with billing amount.. like FOC
+    18. Whatsapp messages
+    19. Prepaid/cash back / credit limit optional to link from pc deals India website.
+    20. In admin panel option to give limited access user wise
+    21. Search keyword.. like in any product in admin panel we can give probable search words for that particular product and if someone on customer panel search that Word he should see the product.
+    22. Cash On Delivery option & extra charges.
+    23. Assigning customer to field boy.
+    24. Special offer link on product… 
+    25. Pop Up facility
+
+
+/////////
+sir good morning
+
+one thing we have to make sure... in hardware website/app
+
+there should be an option of COD also
+
+
+in that we may take some advance from customer ( we can select percentage advance amount in admin panel)
+
+on balance amount we may charge some extra payment (we can decide the extra amount in admin panel)
+
+for more clarity we can discuss on phone
+
+
+cod
+
+Shop Page
+Filter - 
+
+List
+////////////////////////////////////////////////////////
+https://firebase.google.com/docs/cloud-messaging/admin/send-messages
+
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./firebase-adminSDK.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
+const messaging = admin.messaging()
+    var payload = {
+        notification: {
+            title: "This is a Notification",
+            body: "This is the body of the notification message."
+        },
+        topic: 'topic'
+        };
+
+
+    messaging.send(payload)
+    .then((result) => {
+        console.log(result)
+    })
