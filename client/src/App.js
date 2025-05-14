@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
 
   const hideNavbarRoutes = [
     "/user-dashboard",
-    // "/dashboard",
+    "/dashboard",
     // "/login",
     // "/register",
     "/userlist",
@@ -78,7 +78,7 @@ const App = () => {
           
 
           {/* Admin */}
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/userlist" element={<Userlist/>} />
         </Routes>
       </Layout>
