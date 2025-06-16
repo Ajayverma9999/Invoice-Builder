@@ -1,4 +1,4 @@
-import { response, Router } from 'express';
+import { Router } from 'express';
 import Joi from 'joi';
 import faker from 'faker';
 import { requireLocalAuth } from '../middleware/requireLocalAuth';
@@ -12,6 +12,10 @@ import User from '../features/User/user';
 const router = Router();
 
 router.post('/login', requireLocalAuth, (req, res) => {
+  let response = {
+    message : "issue in login",
+    status: 0
+  }
 
   const token = req.user.generateJWT((req.body?.appversion ? req.body.appversion : ''));
   let me = req.user.toJSON();

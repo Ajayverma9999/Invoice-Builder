@@ -59,6 +59,8 @@ const create = async (req, res) =>  {
             slug: req.body.name
         };
 
+        let cat = await Category.create(data);
+        response.cat = cat;
         response.status = 1;
         response.message = 'Successfully added new category'
 

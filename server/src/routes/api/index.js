@@ -9,6 +9,10 @@ import { notification } from '../../features/Notification/';
 import errLogger from './logger';
 import Attribute from '../../features/Attribute';
 import Dashboard from '../../features/Dashborad';
+import Template from '../../features/Template';
+import Category from '../../features/Category';
+import Invoice from '../../features/Invoice';
+import InvoiceFormat from '../../features/InvoiceDateFormat';
 import User from '../../features/User';
 import Role from '../../features/Role'; 
 import Setting from '../../features/Setting';
@@ -24,17 +28,16 @@ import importFiles from '../../helper/importExport';
 const router = Router();
 
 // Role routing
-/*
-router.get('/roles', Category.list);
-router.post('/role/add', Category.add);
-router.put('/role/edit/:id', Category.edit);
-router.delete('/role/edit/:id', Category.delete);
 
-router.put('/user/edit/:id', Category.edit);
- 
+router.get('/category', Category.list);
+router.post('/category/add', requireJwtAuth, Category.create);
+router.post('/category/edit', requireJwtAuth, Category.update);
+router.post('/category/edit/:id', Category.del);
 
-router.delete('/user/edit/:id', Category.delete);
-*/
+// invoice date format 
+router.post('/invoice/date/add', InvoiceFormat.create);
+router.post('/invoice/date/list', InvoiceFormat.list);
+router.post('/invoice/date/frontend/list', InvoiceFormat.frontendList);
 
 
 router.get('/home', Home.getHomePage);
@@ -43,6 +46,16 @@ router.get('/roles', Role.list);
 router.post('/role/add', Role.create);
 router.put('/role/edit/:id', Role.update);
 
+
+// invoice routing 
+router.post('/invoice/add', requireJwtAuth, Invoice.create);
+
+
+// template routing
+router.post('/template/add', requireJwtAuth, Template.create);
+router.post('/template/update', requireJwtAuth, Template.update);
+router.post('/template/list', requireJwtAuth, Template.list);
+router.post('/template/frontend/list', requireJwtAuth, Template.frontendList);
 
 // adminDashboard
 // User routing
@@ -57,6 +70,7 @@ router.post('/user/signup', User.create);
 router.get('/user/profile', requireJwtAuth, User.getProfile);
 router.post('/user/profile',  User.userProfile);
 router.post('/user/profile/edit', requireJwtAuth, User.updateProfile);
+router.post('/user/invoice/setting/edit', requireJwtAuth, User.updateInvoiceSetting);
 
 // Address
 router.post('/user/address/add', requireJwtAuth, User.addAddress);

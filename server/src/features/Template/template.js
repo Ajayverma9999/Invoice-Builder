@@ -16,13 +16,10 @@ const TemplateSchema = new Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category'
         },
-        templateNo: {
-            type: Number,
+        templateId: {
+            type: String,
             unique: true,
             required: true
-        },
-        slug: {
-            type: String
         },
         status: {
             type: Boolean,
@@ -39,10 +36,9 @@ const TemplateSchema = new Schema(
 TemplateSchema.methods.toJSON = function () {
 
     return {
-        id: this.id,
+        id: this._id,
         name: this.name,
         description: this.description,
-        slug: this.slug,
         status: this.status,
         softDelete: this.softDelete,
         templateNo: this.templateNo,
