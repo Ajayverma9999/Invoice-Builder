@@ -476,21 +476,27 @@ const updatePassword = async (req, res) => {
 const updateInvoiceSetting = async (req, res) => {
     try {
         let data = {};
-        let invoiceSettings = {};
-        invoiceSettings.financialYearStart = req.body.financialYearStart;
-        invoiceSettings.financialYearEnd = req.body.financialYearEnd;
-        invoiceSettings.invoiceNumberFormat = req.body.invoiceNumberFormat;
-        invoiceSettings.invoiceDateFormat = req.body.invoiceDateFormat;
-        // invoiceSettings.invoiceNumberFormat = ObjectId(req.body.invoiceNumberFormat);
-        invoiceSettings.templates._id.push(ObjectId(req.body.templates));
-        invoiceSettings.resetCycle = req.body.resetCycle;
-        invoiceSettings.dateInclude = req.body.dateInclude;
-        invoiceSettings.templateIndex = req.body.templateIndex ? req.body.templateIndex : 0;
-        data.invoiceSettings = invoiceSettings;
+        
+        if(req.body.financialYearStart) data.financialYearStart = req.body.financialYearStart;
+        if(req.body.financialYearEnd) data.financialYearEnd = req.body.financialYearEnd;
+        data.template = ObjectId(req.body.template);
+        data.invoiceNumberFormat = ObjectId(req.body.invoiceNumberFormat);
+        data.resetCycle = req.body.resetCycle;
+        data.invoicePrefix = req.body.invoicePrefix;
+        data.startDateInclude = req.body.startDateInclude;
+        if(req.body.endDateInclude) data.endDateInclude = req.body.endDateInclude;
 
-        await User.updateOne({_id : ObjectId(req.user.id)}, {$set : data});
+        let user = await User.findOne({_id: ObjectId(req.user.id)});
+
+        if(user.invoiceSettings.templates == undefined){
+            user.invoiceSettings.templates = [];
+        }
+        user.invoiceSettings.templates.push(data);
+        user.invoiceSettings.templateIndex = req.body.templateIndex ? req.body.templateIndex : (user.invoiceSettings.templates.length - 1);
+
+        await user.save();
     } catch (err) {
-        logger.error(err.message, { metadata: err });
+        logger.error(err.message, { metadata: err }); 
         response.message = err.message || err.toString();
         response.status = 0;
         return res.json(response);

@@ -72,16 +72,24 @@ const create = async (req, res) => {
     }
 
     try {
-        let prev = await Template.findOne({}).select('templateNo');
-        let templateNo = 1;
+        let prev = await Template.findOne({}).select('templateId').sort({_id: -1});
+        let templateNo = 1000;
         if(prev){
-            templateNo = prev.templateNo + 1;
+            let id = prev.templateId;
+            if(id){
+                templateNo = parseInt(id.replace('T', ''));
+                templateNo++;
+            }else{
+                templateNo++;
+            }
+        }else{
+            templateNo++;
         }
         let data = {}
+        data.templateId = `T${counter}`;
         data.name = req.body.name;
         data.slug = req.body.name;
         data.description = req.body.description;
-        data.templateNo = req.body.templateNo;
         data.category = ObjectId(req.body.category);
 
         await Template.create(data);
@@ -117,6 +125,12 @@ const update = async (req, res) => {
         }
         if(req.body.description) data.description = req.body.description;
         data.category = ObjectId(req.body.category);
+        if(req.body.status != undefined){
+            data.status = req.body.status;
+        }
+        if(req.body.softDelete != undefined){
+            data.softDelete = req.body.softDelete;
+        }
 
         await Template.updateOne({_id: req.body.id}, {$set : data});
 
@@ -134,3 +148,4 @@ const update = async (req, res) => {
     }
 }
 
+module.exports = { list, frontendList, create, update};

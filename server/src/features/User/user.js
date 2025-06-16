@@ -26,8 +26,8 @@ const userSchema = new Schema(
     },
     phone: {
       type: String,
-      required: [true, 'Phone is required.'],
-      unique: true,
+      // required: [true, 'Phone is required.'],
+      // unique: true,
       trim: true,
       index: true
     },
@@ -45,38 +45,39 @@ const userSchema = new Schema(
       index: true
     },
     invoiceSettings: {
-      financialYearStart: {
-        type: Date,
-        default: () => {
-          const curr = new Date();
-          return curr.getMonth() >= 3 ? new Date(curr.getFullYear(), 3, 1) : new Date(curr.getFullYear() - 1, 3, 1);
-        }
-      },
-      financialYearEnd: {
-        type: Date,
-        default: () => {
-          const curr = new Date();
-          return curr.getMonth() >= 3 ? new Date(curr.getFullYear() + 1, 2, 31) : new Date(curr.getFullYear(), 2, 31)
-        }
-      },
-      invoicePrefix: { type: String },
-      invoiceNumberFormat: { type: String },
-      invoiceDateFormat: { type: String },
-      // invoiceNumberFormat: { type: mongoose.Schema.Types.ObjectId, ref: 'InvoiceFormat' },
       templates: [{
-        _id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Template'
-        }
+        template: { type: mongoose.Schema.Types.ObjectId, ref: 'Template' },
+        financialYearStart: {
+          type: Date,
+          default: () => {
+            const curr = new Date();
+            return curr.getMonth() >= 3 ? new Date(curr.getFullYear(), 3, 1) : new Date(curr.getFullYear() - 1, 3, 1);
+          }
+        },
+        financialYearEnd: {
+          type: Date,
+          default: () => {
+            const curr = new Date();
+            return curr.getMonth() >= 3 ? new Date(curr.getFullYear() + 1, 2, 31) : new Date(curr.getFullYear(), 2, 31)
+          }
+        },
+        invoiceNumberFormat: { type: mongoose.Schema.Types.ObjectId, ref: 'InvoiceDateFormat' },
+        resetCycle: {
+          type: String,
+          enum: ["yearly", "monthly", "daily", "never"]
+        },
+        invoicePrefix: { type: String },
+        startDateInclude: {
+          type: Boolean,
+          defualt: true
+        },
+        endDateInclude: {
+          type: Boolean,
+          defualt: false
+        },
+        previousInvCount: {type: Number, default: 0}
       }],
-      resetCycle: {
-        type: String,
-        enum: ["yearly", "monthly", "daily"]
-      },
-      dateInclude: {
-        type: Boolean
-      },
-      templateIndex: { type: Number, default: 0 }
+      templateIndex: {type: Number, default: 0}
     },
     role: {
       type: mongoose.Schema.Types.ObjectId,
@@ -126,10 +127,7 @@ userSchema.methods.toJSON = function () {
     selectedAddress: this.selectedAddress,
     updatedAt: this.updatedAt,
     createdAt: this.createdAt,
-
   };
-
-
 };
 
 const isProduction = process.env.NODE_ENV === 'production';
