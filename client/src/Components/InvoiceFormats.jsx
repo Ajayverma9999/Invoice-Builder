@@ -21,29 +21,33 @@ const formats = [
 
 const InvoiceFormats = () => {
   return (
-    <section className="py-20 bg-gray-50 px-6">
+    <section className="py-20 px-6 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-6">Invoice Maker in Different Formats</h2>
-        <p className="text-gray-600 mb-10 max-w-2xl mx-auto">
-          Choose from a variety of formats designed for different business needs. Whether you're a freelancer, consultant, or retailer — we’ve got you covered.
+        <h2 className="text-5xl font-bold text-gray-800 mb-6">
+          Invoice Maker in <span className="text-[#e6007b]">Different Formats</span>
+        </h2>
+        <p className="text-gray-600 text-lg mb-14 max-w-3xl mx-auto">
+          Select from a wide range of invoice formats tailored for freelancers, consultants, retailers, and more.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  {formats.map((format, index) => (
-    <div
-      key={index}
-      className="bg-white shadow-md rounded-md shadow-md border border-gray-500 transition p-6 rounded-lg text-center cursor-pointer border border-gray-100"
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#e6007b')}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'white')}
-    >
-      <h3 className="text-lg font-semibold text-gray-800">{format}</h3>
-    </div>
-  ))}
-</div>
-
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {formats.map((format, index) => (
+            <div
+              key={index}
+              className="group bg-white border border-gray-200 rounded-2xl p-6 text-center transition-all duration-300 hover:shadow-xl hover:bg-[#e6007b] hover:text-white cursor-pointer"
+            >
+              <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-white">
+                {format}
+              </h3>
+              <div className="mt-2 w-10 h-0.5 mx-auto bg-gray-300 group-hover:bg-white transition-all duration-300 group-hover:w-16"></div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
 export default InvoiceFormats;
+
+

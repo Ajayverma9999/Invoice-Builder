@@ -2,8 +2,8 @@ import React from 'react';
 
 const Login = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: 'rgb(115, 61, 217)' }}>
-      <div className="w-full max-w-md rounded-lg shadow-lg p-8 text-white">
+    <section className="min-h-screen flex items-center justify-center px-4" >
+      <div className="w-full max-w-md rounded-lg shadow-lg p-8 text-white" style={{ backgroundColor: 'rgb(115, 61, 217)' }}>
         <h1 className="text-2xl font-bold text-center mb-6">
           Sign in to your account
         </h1>
@@ -45,7 +45,7 @@ const Login = () => {
 
           <p className="text-sm font-light text-center">
             Don’t have an account yet?{' '}
-            <a href="/rgister" className="font-medium underline hover:text-pink-200">
+            <a href="/register" className="font-medium underline hover:text-pink-200">
               Sign up
             </a>
           </p>

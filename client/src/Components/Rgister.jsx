@@ -2,13 +2,19 @@ import React from 'react';
 
 function Register() {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: 'rgb(115, 61, 217)' }}>
-      <div className="w-full max-w-md rounded-lg shadow-lg p-8 text-white">
-        <h1 className="text-2xl font-bold text-center mb-6">Create an account</h1>
+    <section className="min-h-screen flex items-center justify-center px-4 bg-gray-100">
+      <div
+        className="w-full max-w-md rounded-2xl shadow-xl p-8 text-white"
+        style={{ backgroundColor: 'rgb(115, 61, 217)' }}
+      >
+        <h1 className="text-3xl font-bold text-center mb-6">Create an account</h1>
 
         <form className="space-y-6" action="#">
+          {/* Email */}
           <div>
-            <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Your email</label>
+            <label htmlFor="email" className="block mb-2 text-sm font-medium">
+              Your email
+            </label>
             <input
               type="email"
               name="email"
@@ -19,8 +25,11 @@ function Register() {
             />
           </div>
 
+          {/* Password */}
           <div>
-            <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">Password</label>
+            <label htmlFor="password" className="block mb-2 text-sm font-medium">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -31,8 +40,11 @@ function Register() {
             />
           </div>
 
+          {/* Confirm Password */}
           <div>
-            <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-white">Confirm password</label>
+            <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium">
+              Confirm password
+            </label>
             <input
               type="password"
               name="confirm-password"
@@ -43,6 +55,7 @@ function Register() {
             />
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full py-3 px-5 text-sm font-semibold bg-[#e6007b] text-white rounded-lg hover:bg-pink-600 transition"
@@ -50,7 +63,8 @@ function Register() {
             Create an account
           </button>
 
-          <p className="text-sm font-light text-center text-white">
+          {/* Login Link */}
+          <p className="text-sm font-light text-center">
             Already have an account?{' '}
             <a href="/login" className="font-medium underline hover:text-pink-200">
               Login here

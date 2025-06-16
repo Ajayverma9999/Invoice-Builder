@@ -1,12 +1,15 @@
 import React from 'react';
+import Footer from './Footer';
+import invoiceTemplateImg from '../image/inventory-status.png';
 
 const AboutSection = () => {
   return (
-    <section
+    <>
+      <section
       className="py-20 pt-40 px-12"
-      style={{ backgroundColor: 'rgb(115, 61, 217)' }}
+      style={{ backgroundColor: 'white' }}
     >
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center text-white">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center text-black">
         
         <div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">About Our Invoice Builder</h2>
@@ -27,15 +30,19 @@ const AboutSection = () => {
         </div>
 
         
-        <div className="flex justify-center">
-          <img
-            src="/images/about-invoice.svg" 
-            alt="About Invoice Builder"
-            className="w-full max-w-md"
-          />
-        </div>
+          <div className=" mb-6 pt-20 flex justify-center">
+                                <img
+                                    src={invoiceTemplateImg} 
+                                    alt="Invoice Illustration"
+                                    className="w-full max-w-md"
+                                />
+                            </div>
       </div>
     </section>
+      <Footer/>
+    
+    </>
+  
   );
 };
 

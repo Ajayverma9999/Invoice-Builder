@@ -1,70 +1,94 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-class Contact extends Component {
-  render() {
-    return (
-      <section
-        style={{ backgroundColor: 'rgb(115, 61, 217)' }}
-        className="pt-10"
-      >
-        <div className="py-12 lg:py-20 px-4 mx-auto max-w-screen-md text-white">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center">
-            Contact Us
-          </h2>
-          <p className="mb-10 font-light text-center sm:text-xl">
-            Got a technical issue? Want to send feedback about a beta feature?
-            Need details about our Business plan? Let us know.
-          </p>
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  phone: Yup.string()
+    .required('Phone is required')
+    .matches(/^[0-9]{10}$/, 'Phone must be 10 digits'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+});
 
-          <form className="space-y-8">
-            <div>
-              <label htmlFor="email" className="block mb-2 text-sm font-medium">
-                Your email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="w-full p-3 text-sm text-black bg-white border border-white border-opacity-30 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
-                placeholder="name@example.com"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="subject" className="block mb-2 text-sm font-medium">
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                className="w-full p-3 text-sm text-black bg-white border border-white border-opacity-30 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
-                placeholder="Let us know how we can help you"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block mb-2 text-sm font-medium">
-                Your message
-              </label>
-              <textarea
-                id="message"
-                rows="6"
-                className="w-full p-3 text-sm text-black bg-white border border-white border-opacity-30 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition"
-                placeholder="Leave a comment..."
-              ></textarea>
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="w-full py-3 px-5 text-sm font-semibold bg-[#e6007b] text-white rounded-lg hover:bg-pink-600 transition"
-              >
-                Send Message
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-    );
-  }
-}
+const Contact = () => {
+  return (
+ <section className="min-h-screen flex items-center justify-center px-4" >
+      <div className="w-full max-w-md rounded-lg shadow-lg p-8 text-white" style={{ backgroundColor: 'rgb(115, 61, 217)' }}>
+        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center">
+          Contact Us
+        </h2>
+        <p className="mb-10 font-light text-center sm:text-xl">
+          Got a technical issue? Want to send feedback about a beta feature?
+          Need details about our Business plan? Let us know.
+        </p>
+
+        <Formik
+          initialValues={{ name: '', email: '', phone: '' }}
+          validationSchema={validationSchema}
+          onSubmit={(values, { resetForm }) => {
+            console.log('Form submitted:', values);
+            resetForm();
+          }}
+        >
+          {({ handleSubmit }) => (
+            <Form className="space-y-6" onSubmit={handleSubmit}>
+              {/* Name and Phone */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="text-start">
+                  <label htmlFor="name" className="block mb-2 text-sm font-medium">
+                    Name
+                  </label>
+                  <Field
+                    type="text"
+                    name="name"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+                    placeholder="Your name"
+                  />
+                  <ErrorMessage name="name" component="div" className="text-red-300 text-sm mt-1" />
+                </div>
+
+                <div className="text-start">
+                  <label htmlFor="phone" className="block mb-2 text-sm font-medium">
+                    Phone
+                  </label>
+                  <Field
+                    type="text"
+                    name="phone"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+                    placeholder="Phone number"
+                  />
+                  <ErrorMessage name="phone" component="div" className="text-red-300 text-sm mt-1" />
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="text-start">
+                <label htmlFor="email" className="block mb-2 text-sm font-medium">
+                  Email
+                </label>
+                <Field
+                  type="email"
+                  name="email"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-black"
+                  placeholder="Email address"
+                />
+                <ErrorMessage name="email" component="div" className="text-red-300 text-sm mt-1" />
+              </div>
+
+          
+                <button
+            type="submit"
+            className="w-full py-3 px-5 text-sm font-semibold bg-[#e6007b] text-white rounded-lg hover:bg-pink-600 transition"
+          >
+           Submit
+          </button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </section>
+  );
+};
 
 export default Contact;
+

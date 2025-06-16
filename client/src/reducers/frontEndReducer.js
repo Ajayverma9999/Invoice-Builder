@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { allApi, messages, postApi } from "../helpers/apiStructure";
+import { allApi, messages, postApi } from "../Components/Helper/apiStructure";
 
 const initialState = {
   getCatsFrontEndData: [],

@@ -5,7 +5,7 @@ import {
   messages,
   postApi,
   postApiFile,
-} from "../helpers/apiStructure";
+} from "../Components/Helper/apiStructure";
 import { coupons, rewardSiteBaseUrl } from "../const";
 
 const initialState = {
@@ -340,7 +340,7 @@ export const plansExport = createAsyncThunk("plansExport", async (body) => {
   const result = await postApi(`${baseUrl}/api/plans`, "post", body);
   return result;
 });
-export const plansListExport = createAsyncThunk("productsListExport", async (body) => {
+export const plansListExport = createAsyncThunk("plansListExport", async (body) => {
   const result = await postApi(`${baseUrl}/api/backend/plans`, "post", body);
   return result;
 });
@@ -809,6 +809,210 @@ export const userLogOut = createAsyncThunk("userLogOut", async (body) => {
   await messages(result?.message, result?.status);
   return result;
 });
+// const userReducer = createSlice({
+//   name: "details",
+//   initialState,
+//   reducers: {
+//     increaseLocalItem: (state) => {
+//       state.localStorageCartItem += 1;
+//     },
+//   },
+//   extraReducers: {
+//     [resetProductList.fulfilled]: (state, action) => {
+//       state.productsListData = [];
+//     },
+//     [resetplansList.fulfilled]: (state, action) => {
+//       state.plansListData = [];
+//     },
+//     [resetplans.fulfilled]: (state, action) => {
+//       state.plansData = [];
+//     },
+//     [resetUsersList.fulfilled]: (state, action) => {
+//       state.getUsersData = [];
+//     },
+//     [getHomePageSetting.fulfilled]: (state, action) => {
+//       state.getHomePageSettingList = action.payload;
+//     },
+//     [getAllStates.fulfilled]: (state, action) => {
+//       state.getAllStatesList = action.payload;
+//     },
+//     [getSocialMediaSettings.fulfilled]: (state, action) => {
+//       state.getSocialMediaSettingsData = action.payload?.socialAccounts;
+//     },
+//     [getDashBoard.fulfilled]: (state, action) => {
+//       state.getDashBoardData = action.payload;
+//     },
+//     [getAttributes.fulfilled]: (state, action) => {
+//       state.getAttributesData = action.payload;
+//     },
+//     [CreateProduct.fulfilled]: (state, action) => {
+//       state.getNewProductData = action.payload?.product?.id;
+//       action.payload?.product?.id.length > 0 &&
+//         localStorage.setItem("productId", action.payload?.product?.id);
+//       action.payload?.status === 1 &&
+//         localStorage.setItem("newProductapiStatus", action.payload?.status);
+//     },
+//     [productsList.fulfilled]: (state, action) => {
+//       state.productsListData = [
+//         ...state.productsListData,
+//         ...action.payload?.list,
+//       ];
+//       state.productsBlank = action.payload?.list;
+//     },
+//     [productsListExport.fulfilled]: (state, action) => {
+//       state.productsListExportData = action.payload?.list;
+//     },
+
+//     [plansList.fulfilled]: (state, action) => {
+//       state.plansListData = [
+//         ...state.plansListData,
+//         ...action.payload?.list,
+//       ];
+//       state.productsBlank = action.payload?.list;
+//     },
+//     [plansListExport.fulfilled]: (state, action) => {
+//       state.plansListExportData = action.payload?.list;
+//     },
+//     [plans.fulfilled]: (state, action) => {
+//       state.plansData = [
+//         ...state.plansData,
+//         ...action.payload?.list,
+//       ];
+//       state.productsBlank = action.payload?.list;
+//     },
+//     [plansExport.fulfilled]: (state, action) => {
+//       state.plansExportData = action.payload?.list;
+//     },
+//     [getCoupons.fulfilled]: (state, action) => {
+//       state.getCouponsData = action.payload;
+//     },
+//     [applyCoupon.fulfilled]: (state, action) => {
+//       state.applyCouponData = action.payload;
+//       action.payload?.status === 1 &&
+//         localStorage.setItem("couponCode", action.payload?.status);
+//       action.payload?.status === 1 &&
+//         localStorage.setItem("couponAmount", action.payload?.coupon?.amount);
+//     },
+    
+//     [similarproductions.fulfilled]: (state, action) => {
+//       state.similarproductionsData = action.payload;
+//     },
+//     [getUsers.fulfilled]: (state, action) => {
+//       state.getUsersData = [...state.getUsersData, ...action.payload?.list];
+//       state.usersBlank = action.payload?.list;
+//     },
+//     [getUsersExport.fulfilled]: (state, action) => {
+//       state.getUsersExportList = action.payload?.list;
+//     },
+//     [sendVerificationCode.fulfilled]: (state, action) => {
+//       action.payload?.status === 1 &&
+//         localStorage.setItem("sendVerificationCode", action.payload?.status);
+//     },
+//     [verifyOTP.fulfilled]: (state, action) => {
+//       action.payload?.status === 1 &&
+//         localStorage.setItem("verifyOTP", action.payload?.status);
+//     },
+//     [passwordChanges.fulfilled]: (state, action) => {
+//       action.payload?.status === 1 &&
+//         localStorage.setItem("passwordChanges", action.payload?.status);
+//     },
+//     [dashboardRecord.fulfilled]: (state, action) => {
+//       state.dashboardRecordData = action.payload?.list;
+//     },
+//     [getCategories.fulfilled]: (state, action) => {
+//       state.getCategoriesData = action.payload;
+//     },
+//     [getServices.fulfilled]: (state, action) => {
+//       state.getServicesData = action.payload;
+//     },
+//     [getServicesFrontEnd.fulfilled]: (state, action) => {
+//       state.getServicesFrontEndData = action.payload;
+//     },
+//     [getBanners.fulfilled]: (state, action) => {
+//       state.getBannersData = action.payload;
+//     },
+//     [getFaq.fulfilled]: (state, action) => {
+//       state.getFaqData = action.payload;
+//     },
+//     [getBrands.fulfilled]: (state, action) => {
+//       state.getBrandsData = action.payload;
+//     },
+//     [getBrandsFrontEnd.fulfilled]: (state, action) => {
+//       state.getBrandsFrontEndData = action.payload;
+//     },
+//     [getCheckoutDeatils.fulfilled]: (state, action) => {
+//       state.getCheckoutDeatilsData = action.payload;
+//     },
+//     [getSettings.fulfilled]: (state, action) => {
+//       state.getSettingsData = action.payload;
+//     },
+//     [getSetting.fulfilled]: (state, action) => {
+//       state.getSettingData = action.payload;
+//     },
+//     [getOpenSetting.fulfilled]: (state, action) => {
+//       state.getSettingData = action.payload;
+//     },
+//     [getReviews.fulfilled]: (state, action) => {
+//       state.getReviewsData = action.payload;
+//     },
+//     [getTaxgsts.fulfilled]: (state, action) => {
+//       state.getTaxgstsData = action.payload;
+//     },
+//     [getTransactions.fulfilled]: (state, action) => {
+//       state.getTransactionsData = action.payload;
+//     },
+//     [getZipcodes.fulfilled]: (state, action) => {
+//       state.getZipcodesData = action.payload;
+//     },
+//     [getCartlist.fulfilled]: (state, action) => {
+//       state.getCartlistData = action.payload;
+//     },
+//     [getProducts.fulfilled]: (state, action) => {
+//       state.getProductsData = action.payload;
+//     },
+//     [getCustomizeOffers.fulfilled]: (state, action) => {
+//       state.getCustomizeOffersData = action.payload?.offers;
+//     },
+//     [getProductRating.fulfilled]: (state, action) => {
+//       state.productRatingData = action.payload?.list;
+//     },
+//     [getSingleProduct.fulfilled]: (state, action) => {
+//       state.getSingleProductData = action.payload;
+//      },
+//     [getMyProfile.fulfilled]: (state, action) => {
+//       state.getMyProfileData = action.payload;
+//     },
+//     [editMyProfile.pending]: (state, action) => {
+//       state.editMyProfileMsg = "Please Wait......";
+//     },
+//     [editMyProfile.fulfilled]: (state, action) => {
+//       state.editMyProfileMsg = "Your profile is edit successfully.";
+//     },
+//     [editMyProfile.rejected]: (state, action) => {
+//       state.editMyProfileMsg = action?.error?.message;
+//     },
+//     [loginWithGoogle.fulfilled]: (state, action) => {
+//       if (action.payload.status === 1) {
+//         localStorage.setItem("x-auth-token", action.payload.token);
+//         localStorage.setItem("userRole", action.payload?.user?.role?.name);
+//         localStorage.setItem("slug", action.payload?.user?.role?.slug);
+//         localStorage.setItem("username", action.payload?.user?.email);
+//       }
+//     },
+//     [adminLogin.fulfilled]: (state, action) => {
+//       if (action.payload.status === 1) {
+//         localStorage.setItem("x-auth-token", action.payload.token);
+//         localStorage.setItem("userRole", action.payload?.me?.role?.name);
+//         localStorage.setItem("slug", action.payload?.me?.role?.slug);
+//         localStorage.setItem("username", action.payload?.me?.email);
+//       }
+//     },
+//     [addProductImages.fulfilled]: (state, action) => {
+//       localStorage.setItem("uploadProductimg", action.payload?.status);
+//     },
+//   },
+// });
+
 const userReducer = createSlice({
   name: "details",
   initialState,
@@ -817,199 +1021,200 @@ const userReducer = createSlice({
       state.localStorageCartItem += 1;
     },
   },
-  extraReducers: {
-    [resetProductList.fulfilled]: (state, action) => {
-      state.productsListData = [];
-    },
-    [resetplansList.fulfilled]: (state, action) => {
-      state.plansListData = [];
-    },
-    [resetplans.fulfilled]: (state, action) => {
-      state.plansData = [];
-    },
-    [resetUsersList.fulfilled]: (state, action) => {
-      state.getUsersData = [];
-    },
-    [getHomePageSetting.fulfilled]: (state, action) => {
-      state.getHomePageSettingList = action.payload;
-    },
-    [getAllStates.fulfilled]: (state, action) => {
-      state.getAllStatesList = action.payload;
-    },
-    [getSocialMediaSettings.fulfilled]: (state, action) => {
-      state.getSocialMediaSettingsData = action.payload?.socialAccounts;
-    },
-    [getDashBoard.fulfilled]: (state, action) => {
-      state.getDashBoardData = action.payload;
-    },
-    [getAttributes.fulfilled]: (state, action) => {
-      state.getAttributesData = action.payload;
-    },
-    [CreateProduct.fulfilled]: (state, action) => {
-      state.getNewProductData = action.payload?.product?.id;
-      action.payload?.product?.id.length > 0 &&
-        localStorage.setItem("productId", action.payload?.product?.id);
-      action.payload?.status === 1 &&
-        localStorage.setItem("newProductapiStatus", action.payload?.status);
-    },
-    [productsList.fulfilled]: (state, action) => {
-      state.productsListData = [
-        ...state.productsListData,
-        ...action.payload?.list,
-      ];
-      state.productsBlank = action.payload?.list;
-    },
-    [productsListExport.fulfilled]: (state, action) => {
-      state.productsListExportData = action.payload?.list;
-    },
-
-    [plansList.fulfilled]: (state, action) => {
-      state.plansListData = [
-        ...state.plansListData,
-        ...action.payload?.list,
-      ];
-      state.productsBlank = action.payload?.list;
-    },
-    [plansListExport.fulfilled]: (state, action) => {
-      state.plansListExportData = action.payload?.list;
-    },
-    [plans.fulfilled]: (state, action) => {
-      state.plansData = [
-        ...state.plansData,
-        ...action.payload?.list,
-      ];
-      state.productsBlank = action.payload?.list;
-    },
-    [plansExport.fulfilled]: (state, action) => {
-      state.plansExportData = action.payload?.list;
-    },
-    [getCoupons.fulfilled]: (state, action) => {
-      state.getCouponsData = action.payload;
-    },
-    [applyCoupon.fulfilled]: (state, action) => {
-      state.applyCouponData = action.payload;
-      action.payload?.status === 1 &&
-        localStorage.setItem("couponCode", action.payload?.status);
-      action.payload?.status === 1 &&
-        localStorage.setItem("couponAmount", action.payload?.coupon?.amount);
-    },
-    
-    [similarproductions.fulfilled]: (state, action) => {
-      state.similarproductionsData = action.payload;
-    },
-    [getUsers.fulfilled]: (state, action) => {
-      state.getUsersData = [...state.getUsersData, ...action.payload?.list];
-      state.usersBlank = action.payload?.list;
-    },
-    [getUsersExport.fulfilled]: (state, action) => {
-      state.getUsersExportList = action.payload?.list;
-    },
-    [sendVerificationCode.fulfilled]: (state, action) => {
-      action.payload?.status === 1 &&
-        localStorage.setItem("sendVerificationCode", action.payload?.status);
-    },
-    [verifyOTP.fulfilled]: (state, action) => {
-      action.payload?.status === 1 &&
-        localStorage.setItem("verifyOTP", action.payload?.status);
-    },
-    [passwordChanges.fulfilled]: (state, action) => {
-      action.payload?.status === 1 &&
-        localStorage.setItem("passwordChanges", action.payload?.status);
-    },
-    [dashboardRecord.fulfilled]: (state, action) => {
-      state.dashboardRecordData = action.payload?.list;
-    },
-    [getCategories.fulfilled]: (state, action) => {
-      state.getCategoriesData = action.payload;
-    },
-    [getServices.fulfilled]: (state, action) => {
-      state.getServicesData = action.payload;
-    },
-    [getServicesFrontEnd.fulfilled]: (state, action) => {
-      state.getServicesFrontEndData = action.payload;
-    },
-    [getBanners.fulfilled]: (state, action) => {
-      state.getBannersData = action.payload;
-    },
-    [getFaq.fulfilled]: (state, action) => {
-      state.getFaqData = action.payload;
-    },
-    [getBrands.fulfilled]: (state, action) => {
-      state.getBrandsData = action.payload;
-    },
-    [getBrandsFrontEnd.fulfilled]: (state, action) => {
-      state.getBrandsFrontEndData = action.payload;
-    },
-    [getCheckoutDeatils.fulfilled]: (state, action) => {
-      state.getCheckoutDeatilsData = action.payload;
-    },
-    [getSettings.fulfilled]: (state, action) => {
-      state.getSettingsData = action.payload;
-    },
-    [getSetting.fulfilled]: (state, action) => {
-      state.getSettingData = action.payload;
-    },
-    [getOpenSetting.fulfilled]: (state, action) => {
-      state.getSettingData = action.payload;
-    },
-    [getReviews.fulfilled]: (state, action) => {
-      state.getReviewsData = action.payload;
-    },
-    [getTaxgsts.fulfilled]: (state, action) => {
-      state.getTaxgstsData = action.payload;
-    },
-    [getTransactions.fulfilled]: (state, action) => {
-      state.getTransactionsData = action.payload;
-    },
-    [getZipcodes.fulfilled]: (state, action) => {
-      state.getZipcodesData = action.payload;
-    },
-    [getCartlist.fulfilled]: (state, action) => {
-      state.getCartlistData = action.payload;
-    },
-    [getProducts.fulfilled]: (state, action) => {
-      state.getProductsData = action.payload;
-    },
-    [getCustomizeOffers.fulfilled]: (state, action) => {
-      state.getCustomizeOffersData = action.payload?.offers;
-    },
-    [getProductRating.fulfilled]: (state, action) => {
-      state.productRatingData = action.payload?.list;
-    },
-    [getSingleProduct.fulfilled]: (state, action) => {
-      state.getSingleProductData = action.payload;
-     },
-    [getMyProfile.fulfilled]: (state, action) => {
-      state.getMyProfileData = action.payload;
-    },
-    [editMyProfile.pending]: (state, action) => {
-      state.editMyProfileMsg = "Please Wait......";
-    },
-    [editMyProfile.fulfilled]: (state, action) => {
-      state.editMyProfileMsg = "Your profile is edit successfully.";
-    },
-    [editMyProfile.rejected]: (state, action) => {
-      state.editMyProfileMsg = action?.error?.message;
-    },
-    [loginWithGoogle.fulfilled]: (state, action) => {
-      if (action.payload.status === 1) {
-        localStorage.setItem("x-auth-token", action.payload.token);
-        localStorage.setItem("userRole", action.payload?.user?.role?.name);
-        localStorage.setItem("slug", action.payload?.user?.role?.slug);
-        localStorage.setItem("username", action.payload?.user?.email);
-      }
-    },
-    [adminLogin.fulfilled]: (state, action) => {
-      if (action.payload.status === 1) {
-        localStorage.setItem("x-auth-token", action.payload.token);
-        localStorage.setItem("userRole", action.payload?.me?.role?.name);
-        localStorage.setItem("slug", action.payload?.me?.role?.slug);
-        localStorage.setItem("username", action.payload?.me?.email);
-      }
-    },
-    [addProductImages.fulfilled]: (state, action) => {
-      localStorage.setItem("uploadProductimg", action.payload?.status);
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(resetProductList.fulfilled, (state) => {
+        state.productsListData = [];
+      })
+      .addCase(resetplansList.fulfilled, (state) => {
+        state.plansListData = [];
+      })
+      .addCase(resetplans.fulfilled, (state) => {
+        state.plansData = [];
+      })
+      .addCase(resetUsersList.fulfilled, (state) => {
+        state.getUsersData = [];
+      })
+      .addCase(getHomePageSetting.fulfilled, (state, action) => {
+        state.getHomePageSettingList = action.payload;
+      })
+      .addCase(getAllStates.fulfilled, (state, action) => {
+        state.getAllStatesList = action.payload;
+      })
+      .addCase(getSocialMediaSettings.fulfilled, (state, action) => {
+        state.getSocialMediaSettingsData = action.payload?.socialAccounts;
+      })
+      .addCase(getDashBoard.fulfilled, (state, action) => {
+        state.getDashBoardData = action.payload;
+      })
+      .addCase(getAttributes.fulfilled, (state, action) => {
+        state.getAttributesData = action.payload;
+      })
+      .addCase(CreateProduct.fulfilled, (state, action) => {
+        state.getNewProductData = action.payload?.product?.id;
+        if (action.payload?.product?.id?.length > 0) {
+          localStorage.setItem("productId", action.payload.product.id);
+        }
+        if (action.payload?.status === 1) {
+          localStorage.setItem("newProductapiStatus", action.payload.status);
+        }
+      })
+      .addCase(productsList.fulfilled, (state, action) => {
+        state.productsListData = [
+          ...state.productsListData,
+          ...action.payload?.list,
+        ];
+        state.productsBlank = action.payload?.list;
+      })
+      .addCase(productsListExport.fulfilled, (state, action) => {
+        state.productsListExportData = action.payload?.list;
+      })
+      .addCase(plansList.fulfilled, (state, action) => {
+        state.plansListData = [
+          ...state.plansListData,
+          ...action.payload?.list,
+        ];
+        state.productsBlank = action.payload?.list;
+      })
+      .addCase(plansListExport.fulfilled, (state, action) => {
+        state.plansListExportData = action.payload?.list;
+      })
+      .addCase(plans.fulfilled, (state, action) => {
+        state.plansData = [...state.plansData, ...action.payload?.list];
+        state.productsBlank = action.payload?.list;
+      })
+      .addCase(plansExport.fulfilled, (state, action) => {
+        state.plansExportData = action.payload?.list;
+      })
+      .addCase(getCoupons.fulfilled, (state, action) => {
+        state.getCouponsData = action.payload;
+      })
+      .addCase(applyCoupon.fulfilled, (state, action) => {
+        state.applyCouponData = action.payload;
+        if (action.payload?.status === 1) {
+          localStorage.setItem("couponCode", action.payload.status);
+          localStorage.setItem("couponAmount", action.payload?.coupon?.amount);
+        }
+      })
+      .addCase(similarproductions.fulfilled, (state, action) => {
+        state.similarproductionsData = action.payload;
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.getUsersData = [...state.getUsersData, ...action.payload?.list];
+        state.usersBlank = action.payload?.list;
+      })
+      .addCase(getUsersExport.fulfilled, (state, action) => {
+        state.getUsersExportList = action.payload?.list;
+      })
+      .addCase(sendVerificationCode.fulfilled, (state, action) => {
+        if (action.payload?.status === 1) {
+          localStorage.setItem("sendVerificationCode", action.payload.status);
+        }
+      })
+      .addCase(verifyOTP.fulfilled, (state, action) => {
+        if (action.payload?.status === 1) {
+          localStorage.setItem("verifyOTP", action.payload.status);
+        }
+      })
+      .addCase(passwordChanges.fulfilled, (state, action) => {
+        if (action.payload?.status === 1) {
+          localStorage.setItem("passwordChanges", action.payload.status);
+        }
+      })
+      .addCase(dashboardRecord.fulfilled, (state, action) => {
+        state.dashboardRecordData = action.payload?.list;
+      })
+      .addCase(getCategories.fulfilled, (state, action) => {
+        state.getCategoriesData = action.payload;
+      })
+      .addCase(getServices.fulfilled, (state, action) => {
+        state.getServicesData = action.payload;
+      })
+      .addCase(getServicesFrontEnd.fulfilled, (state, action) => {
+        state.getServicesFrontEndData = action.payload;
+      })
+      .addCase(getBanners.fulfilled, (state, action) => {
+        state.getBannersData = action.payload;
+      })
+      .addCase(getFaq.fulfilled, (state, action) => {
+        state.getFaqData = action.payload;
+      })
+      .addCase(getBrands.fulfilled, (state, action) => {
+        state.getBrandsData = action.payload;
+      })
+      .addCase(getBrandsFrontEnd.fulfilled, (state, action) => {
+        state.getBrandsFrontEndData = action.payload;
+      })
+      .addCase(getCheckoutDeatils.fulfilled, (state, action) => {
+        state.getCheckoutDeatilsData = action.payload;
+      })
+      .addCase(getSettings.fulfilled, (state, action) => {
+        state.getSettingsData = action.payload;
+      })
+      .addCase(getSetting.fulfilled, (state, action) => {
+        state.getSettingData = action.payload;
+      })
+      .addCase(getOpenSetting.fulfilled, (state, action) => {
+        state.getSettingData = action.payload;
+      })
+      .addCase(getReviews.fulfilled, (state, action) => {
+        state.getReviewsData = action.payload;
+      })
+      .addCase(getTaxgsts.fulfilled, (state, action) => {
+        state.getTaxgstsData = action.payload;
+      })
+      .addCase(getTransactions.fulfilled, (state, action) => {
+        state.getTransactionsData = action.payload;
+      })
+      .addCase(getZipcodes.fulfilled, (state, action) => {
+        state.getZipcodesData = action.payload;
+      })
+      .addCase(getCartlist.fulfilled, (state, action) => {
+        state.getCartlistData = action.payload;
+      })
+      .addCase(getProducts.fulfilled, (state, action) => {
+        state.getProductsData = action.payload;
+      })
+      .addCase(getCustomizeOffers.fulfilled, (state, action) => {
+        state.getCustomizeOffersData = action.payload?.offers;
+      })
+      .addCase(getProductRating.fulfilled, (state, action) => {
+        state.productRatingData = action.payload?.list;
+      })
+      .addCase(getSingleProduct.fulfilled, (state, action) => {
+        state.getSingleProductData = action.payload;
+      })
+      .addCase(getMyProfile.fulfilled, (state, action) => {
+        state.getMyProfileData = action.payload;
+      })
+      .addCase(editMyProfile.pending, (state) => {
+        state.editMyProfileMsg = "Please Wait......";
+      })
+      .addCase(editMyProfile.fulfilled, (state) => {
+        state.editMyProfileMsg = "Your profile is edit successfully.";
+      })
+      .addCase(editMyProfile.rejected, (state, action) => {
+        state.editMyProfileMsg = action?.error?.message;
+      })
+      .addCase(loginWithGoogle.fulfilled, (state, action) => {
+        if (action.payload.status === 1) {
+          localStorage.setItem("x-auth-token", action.payload.token);
+          localStorage.setItem("userRole", action.payload?.user?.role?.name);
+          localStorage.setItem("slug", action.payload?.user?.role?.slug);
+          localStorage.setItem("username", action.payload?.user?.email);
+        }
+      })
+      .addCase(adminLogin.fulfilled, (state, action) => {
+        if (action.payload.status === 1) {
+          localStorage.setItem("x-auth-token", action.payload.token);
+          localStorage.setItem("userRole", action.payload?.me?.role?.name);
+          localStorage.setItem("slug", action.payload?.me?.role?.slug);
+          localStorage.setItem("username", action.payload?.me?.email);
+        }
+      })
+      .addCase(addProductImages.fulfilled, (state, action) => {
+        localStorage.setItem("uploadProductimg", action.payload?.status);
+      });
   },
 });
 

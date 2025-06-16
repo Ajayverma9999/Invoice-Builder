@@ -7,18 +7,14 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const isLoggedIn = !!localStorage.getItem('x-auth-token');
   const userRole = localStorage.getItem('slug');
 
   const handleLogout = () => {
     localStorage.clear();
-    setTimeout(() => {
-      navigate('/');
-    }, 1000);
+    setTimeout(() => navigate('/'), 1000);
   };
 
   return (
@@ -30,31 +26,36 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8 items-center">
-          <Link to="/about" className="text-white hover:text-gray-300">About</Link>
-          <Link to="/contact" className="text-white hover:text-gray-300">Contact</Link>
+        <div className="hidden md:flex items-center justify-center gap-6 text-white font-medium flex-1">
+          <Link to="/" className="hover:text-gray-300">Home</Link>
+          <Link to="/about" className="hover:text-gray-300">About</Link>
+          <Link to="/service" className="hover:text-gray-300">Services</Link>
+          <Link to="/plans" className="hover:text-gray-300">Plans</Link>
+          <Link to="/blog" className="hover:text-gray-300">Blogs</Link>
+          <Link to="/contact" className="hover:text-gray-300">Contact</Link>
+        </div>
 
+        {/* Right side menu */}
+        <div className="hidden md:flex space-x-6 items-center text-white font-medium">
           {!isLoggedIn && (
-            <>
-              <Link to="/login" className="text-white hover:text-gray-300 ">Sign In</Link>
-              {/* <Link to="/register" className="text-white hover:text-gray-300">Sign Up</Link> */}
-            </>
+            <Link to="/login" className="hover:text-gray-300">Sign In</Link>
           )}
-          <Link to="/" className="text-white hover:text-gray-300"><IoHome className="w-6 h-6"/></Link>
 
           {isLoggedIn && userRole === 'admin' && (
-            <Link to="/dashboard" className="text-white hover:text-gray-300">Dashboard</Link>
+            <Link to="/dashboard" className="hover:text-gray-300">Dashboard</Link>
           )}
 
           {isLoggedIn && userRole === 'customer' && (
-            <Link to="/user-dasbord" className="text-white hover:text-gray-300">User Dashboard</Link>
+            <Link to="/user-dasbord" className="hover:text-gray-300">User Dashboard</Link>
           )}
 
           {isLoggedIn && (
-            <button onClick={handleLogout} className="text-white hover:text-gray-300">
+            <button onClick={handleLogout} className="hover:text-gray-300">
               <i className="bi bi-power"></i> Logout
             </button>
           )}
+
+          <p className="hover:text-gray-300">+91 9992356990</p>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -70,37 +71,31 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-gray-50 dark:bg-gray-800 p-4">
-          <ul className="space-y-4">
-            <li><Link to="/" className="block text-gray-800 hover:bg-purple-500 p-2 rounded">Home</Link></li>
-            <li><Link to="/about" className="block text-gray-800 hover:bg-purple-500 p-2 rounded">About</Link></li>
-            <li><Link to="/contact" className="block text-gray-800 hover:bg-purple-500 p-2 rounded">Contact</Link></li>
+        <div className="md:hidden bg-white text-gray-800 p-4 space-y-4">
+          <Link to="/" className="block hover:bg-purple-500 hover:text-white p-2 rounded">Home</Link>
+          <Link to="/about" className="block hover:bg-purple-500 hover:text-white p-2 rounded">About</Link>
+          <Link to="/service" className="block hover:bg-purple-500 hover:text-white p-2 rounded">Services</Link>
+          <Link to="/plans" className="block hover:bg-purple-500 hover:text-white p-2 rounded">Plans</Link>
+          <Link to="/blog" className="block hover:bg-purple-500 hover:text-white p-2 rounded">Blogs</Link>
+          <Link to="/contact" className="block hover:bg-purple-500 hover:text-white p-2 rounded">Contact</Link>
 
-            {!isLoggedIn && (
-              <>
-                <li><Link to="/login" className="block text-gray-800 hover:bg-purple-500 p-2 rounded">Sign In</Link></li>
-                {/* <li><Link to="/register" className="block text-gray-800 hover:bg-purple-500 p-2 rounded">Sign Up</Link></li> */}
-              </>
-            )}
+          {!isLoggedIn && (
+            <Link to="/login" className="block hover:bg-purple-500 hover:text-white p-2 rounded">Sign In</Link>
+          )}
 
-            {isLoggedIn && userRole === 'admin' && (
-              <li><Link to="/dashboard" className="block text-gray-800 hover:bg-purple-500 p-2 rounded">Dashboard</Link></li>
-            )}
+          {isLoggedIn && userRole === 'admin' && (
+            <Link to="/dashboard" className="block hover:bg-purple-500 hover:text-white p-2 rounded">Dashboard</Link>
+          )}
 
-            {isLoggedIn && userRole === 'customer' && (
-              <>
-             <Link to="/user-dasbord" className="text-white hover:text-gray-300">User Dashboard</Link>
-              </>
-            )}
+          {isLoggedIn && userRole === 'customer' && (
+            <Link to="/user-dasbord" className="block hover:bg-purple-500 hover:text-white p-2 rounded">User Dashboard</Link>
+          )}
 
-            {isLoggedIn && (
-              <li>
-                <button onClick={handleLogout} className="block text-gray-800 hover:bg-purple-500 p-2 rounded">
-                  <i className="bi bi-power"></i> Logout
-                </button>
-              </li>
-            )}
-          </ul>
+          {isLoggedIn && (
+            <button onClick={handleLogout} className="block hover:bg-purple-500 hover:text-white p-2 rounded w-full text-left">
+              <i className="bi bi-power"></i> Logout
+            </button>
+          )}
         </div>
       )}
     </nav>

@@ -98,26 +98,31 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="bg-gray-50 py-16 px-4">
+      <section className="bg-gradient-to-tr from-indigo-50 via-white to-indigo-50 py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-12">Features of Invoice Generator</h2>
+        <h2 className="text-4xl font-extrabold text-center mb-12 text-indigo-900">
+          Features of Invoice Generator
+        </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-md transition duration-300"
+              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1"
             >
-              <div className="flex items-start gap-3 mb-3 text-blue-600">
-                <FaCheckCircle size={20} />
-                <h3 className="text-lg  font-semibold">{feature.title}</h3>
+              <div className="flex items-center gap-4 mb-5">
+                <div className="flex items-center justify-center w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full">
+                  <FaCheckCircle size={20} />
+                </div>
+                <h3 className="text-xl font-semibold text-indigo-900">{feature.title}</h3>
               </div>
-              <p className="text-gray-600 text-sm">{feature.description}</p>
+              <p className="text-gray-700 leading-relaxed">{feature.description}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
+
   );
 };
 
